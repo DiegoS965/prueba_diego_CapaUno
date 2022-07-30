@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderControllerWeb extends Controller
@@ -11,8 +12,10 @@ class OrderControllerWeb extends Controller
         $this->validate($request, [
             'nombre_cliente'=>'required',
         ]);
-
-        $request->product()->create($request->all());
+        $order = new Order();
+        $order->nombre_cliente = $request->input('nombre_cliente');
+        $order->timestamps = false;
+        $order->save();
 
         return back();
     }

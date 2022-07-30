@@ -33,7 +33,10 @@ class ProductController extends Controller
             'precio'=>'required'
         ]);
 
-        $request->product()->create($request->all());
+        $product = new Product();
+        $product->nombre_producto = $request->input('nombre_producto');
+        $product->timestamps = false;
+        $product->save();
 
         return response('Producto añadido correctamente',201);
     }
@@ -64,7 +67,8 @@ class ProductController extends Controller
         {
             return response("Producto no encontrado",200);
         }
-
+        
+        $product->timestamps = false;
         $product->update($request->all());
 
         return response("Producto actualizado exitosamente",200);

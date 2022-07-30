@@ -9,6 +9,8 @@ class Detail extends Model
 {
     use HasFactory;
 
+    protected $table = 'pedidos_detalle';
+
     public function order()
     {
         return $this->hasOne(Order::class);
